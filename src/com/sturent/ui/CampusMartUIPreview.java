@@ -109,14 +109,8 @@ public class CampusMartUIPreview extends JFrame {
         main.add(topBox, BorderLayout.NORTH);
 
         // Grid of Category Cards
-        JPanel grid = new JPanel(new GridLayout(0, 2, 16, 16));
+        JPanel grid = new JPanel(new GridLayout(2, 2, 16, 16));
         grid.setOpaque(false);
-
-        grid.add(createCategoryCard("Authentication & Admin (R4 Module)", new JButton[]{
-                createLauncherBtn("Sign In (LoginFrame)", () -> new com.sturent.gui.LoginFrame().setVisible(true)),
-                createLauncherBtn("Create Account (RegisterFrame)", () -> new com.sturent.gui.RegisterFrame().setVisible(true)),
-                createLauncherBtn("Admin Dashboard (AdminDashboardFrame)", () -> new com.sturent.gui.admin.AdminDashboardFrame().setVisible(true))
-        }));
 
         grid.add(createCategoryCard("Marketplace & Items (Screenshots)", new JButton[]{
                 createLauncherBtn("Discover Items (Marketplace Home)", this::openMarketplace),
@@ -142,13 +136,7 @@ public class CampusMartUIPreview extends JFrame {
                 createLauncherBtn("Seller Reviews (SellerReviewsFrame)", this::openSellerReviews)
         }));
 
-        JScrollPane scroll = new JScrollPane(grid);
-        scroll.setBorder(BorderFactory.createEmptyBorder());
-        scroll.setOpaque(false);
-        scroll.getViewport().setOpaque(false);
-        scroll.getVerticalScrollBar().setUnitIncrement(16);
-
-        main.add(scroll, BorderLayout.CENTER);
+        main.add(grid, BorderLayout.CENTER);
 
         // Bottom Bar
         JPanel bottom = new JPanel(new BorderLayout());
