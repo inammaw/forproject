@@ -10,6 +10,20 @@ import java.util.List;
 public class CartDAO {
 
     public boolean add(CartItem item) throws SQLException {
+        String checkSql = "SELECT cart_item_id, quantity FROM cart WHERE user_id = ? AND item_id = ?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement checkPs = con.prepareStatement(checkSql)) {
+            checkPs.setInt(1, item.getUserId());
+            checkPs.setInt(2, item.getItemId());
+            try (ResultSet rs = checkPs.executeQuery()) {
+                if (rs.next()) {
+                    int existingId = rs.getInt("cart_item_id");
+                    int newQty = rs.getInt("quantity") + item.getQuantity();
+                    return updateQuantity(existingId, newQty);
+                }
+            }
+        }
+
         String sql = "INSERT INTO cart (user_id, item_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
         try (Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {

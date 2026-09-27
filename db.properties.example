@@ -1,0 +1,7 @@
+# Aiven MySQL Database Configuration
+db.host=mysql-178f6340-sturent.h.aivencloud.com
+db.port=17980
+db.name=defaultdb
+db.user=avnadmin
+# Enter your Aiven MySQL password below:
+db.password=YOUR_AIVEN_PASSWORD_HERE
