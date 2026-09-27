@@ -137,6 +137,34 @@ public class DiscoverItemsFrame extends JFrame {
         topActions.add(msgsBtn);
         topActions.add(addItemBtn);
 
+        if (com.sturent.Session.isLoggedin()) {
+            com.sturent.model.User currentUser = com.sturent.Session.getCurrentUser();
+            JLabel userBadge = StuRentTheme.createBadge(currentUser.getName() + " (" + currentUser.getRole() + ")",
+                    StuRentTheme.BADGE_GREEN_BG, StuRentTheme.BADGE_GREEN_TEXT);
+            topActions.add(userBadge);
+
+            if ("ADMIN".equalsIgnoreCase(currentUser.getRole())) {
+                JButton adminBtn = StuRentTheme.createSecondaryButton("Admin Panel");
+                adminBtn.addActionListener(e -> new com.sturent.gui.admin.AdminDashboardFrame().setVisible(true));
+                topActions.add(adminBtn);
+            }
+
+            JButton logoutBtn = StuRentTheme.createSecondaryButton("Logout");
+            logoutBtn.addActionListener(e -> {
+                com.sturent.Session.clearSession();
+                dispose();
+                new com.sturent.gui.LoginFrame().setVisible(true);
+            });
+            topActions.add(logoutBtn);
+        } else {
+            JButton loginBtn = StuRentTheme.createSecondaryButton("Login");
+            loginBtn.addActionListener(e -> {
+                dispose();
+                new com.sturent.gui.LoginFrame().setVisible(true);
+            });
+            topActions.add(loginBtn);
+        }
+
         JPanel header = StuRentTheme.createHeader(topActions);
         add(header, BorderLayout.NORTH);
 

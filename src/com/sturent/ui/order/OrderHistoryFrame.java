@@ -227,7 +227,7 @@ public class OrderHistoryFrame extends JFrame {
         amountLbl.setForeground(StuRentTheme.PRIMARY_GREEN);
 
         JLabel addrLbl = new JLabel(o.getDeliveryAddress() != null && !o.getDeliveryAddress().isBlank()
-                ? "📍 " + o.getDeliveryAddress() : "📍 Campus Delivery");
+                ? "Delivery: " + o.getDeliveryAddress() : "Campus Delivery");
         addrLbl.setFont(StuRentTheme.FONT_SMALL);
         addrLbl.setForeground(StuRentTheme.TEXT_MUTED);
 
